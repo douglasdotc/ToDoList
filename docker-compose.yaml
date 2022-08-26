@@ -1,20 +1,20 @@
 version: "1.29.2"
 
 services:
-#  backend:
-#    build:
-#      context: ./backend
-#      dockerfile: Dockerfile
-#    restart: unless-stopped
-#    ports:
-#      - "8080:8080"
-#    volumes:
-#      - ./backend:/usr/backend
-#    environment:
-#      MYSQL_HOST: mysql
-#      MYSQL_USER: root
-#      MYSQL_PASSWORD: Password
-#      MYSQL_DB: todolist_vol
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    restart: unless-stopped
+    ports:
+      - "8080:8080"
+    volumes:
+      - ./backend:/usr/backend
+    environment:
+      MYSQL_HOST: mysql
+      MYSQL_USER: root
+      MYSQL_PASSWORD: Password
+      MYSQL_DB: todolist_vol
 
   mysql:
     image: mysql:latest
