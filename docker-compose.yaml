@@ -1,20 +1,21 @@
 version: "1.29.2"
 
 services:
-  backend:
-    build:
-      context: ./backend
-      dockerfile: Dockerfile
-    restart: unless-stopped
-    ports:
-      - "8080:8080"
-    volumes:
-      - ./backend:/usr/backend
-    environment:
-      MYSQL_HOST: mysql
-      MYSQL_USER: root
-      MYSQL_PASSWORD: Password
-      MYSQL_DB: todolist_vol
+#  backend:
+#    build:
+#      context: ./backend
+#      dockerfile: Dockerfile
+#    restart: unless-stopped
+#    ports:
+#      - "8080:8080"
+#    volumes:
+#      - ./backend:/usr/backend
+#    environment:
+#      SPRING_PROFILES_ACTIVE: dev
+#      MYSQL_HOST: mysql
+#      MYSQL_USER: root
+#      MYSQL_PASSWORD: Password
+#      MYSQL_DB: todolist_vol
 
   mysql:
     image: mysql:latest
@@ -23,8 +24,9 @@ services:
     volumes:
       - todolist_vol:/var/lib/mysql
     environment:
-      MYSQL_ROOT_PASSWORD: Password
       MYSQL_DATABASE: todolist_vol
+      MYSQL_USER: root
+      MYSQL_ROOT_PASSWORD: Password
 
 volumes:
   todolist_vol:
