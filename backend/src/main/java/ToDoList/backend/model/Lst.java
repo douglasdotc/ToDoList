@@ -1,19 +1,40 @@
 package TodoList.backend.model;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.time.Duration;
 import java.time.LocalDateTime;
+
+// This class describes:
+// - The entities of the table Lst
+// - The getters and setters
+// - The methods to construct a row in the table Lst
 @Entity
 public class Lst {
+
+//    This will create a sequence table named lst_sequence that keep track of the next id value to be inserted.
+//    I do not see any benefit using this at the moment.
+//    @Id
+//    @SequenceGenerator(
+//            name = "lst_sequence",
+//            sequenceName = "lst_sequence",
+//            allocationSize = 1
+//    )
+//    @GeneratedValue(
+//            strategy = GenerationType.SEQUENCE,
+//            generator = "lst_sequence"
+//    )
+
     @Id
-    @GeneratedValue(strategy= GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "list_id")
     private Long list_id;
     private String title;
     private String descript;
     private LocalDateTime created_time;
     private LocalDateTime last_edited_time;
+
+    @Transient
+    private Long live_time_day;
 
     public Lst(String title, String descript, LocalDateTime created_time, LocalDateTime last_edited_time) {
         this.title = title;
@@ -73,6 +94,14 @@ public class Lst {
         this.last_edited_time = last_edited_time;
     }
 
+    public Long getLive_time_day() {
+        return Duration.between(this.created_time, LocalDateTime.now()).toDays();
+    }
+
+    public void setLive_time_day(Long live_time_day) {
+        this.live_time_day = live_time_day;
+    }
+
     @Override
     public String toString() {
         return "Lst{" +
@@ -81,6 +110,7 @@ public class Lst {
                 ", descript='" + descript + '\'' +
                 ", created_time=" + created_time +
                 ", last_edited_time=" + last_edited_time +
+                ", live_time_day=" + live_time_day +
                 '}';
     }
 }

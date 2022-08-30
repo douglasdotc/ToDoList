@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
+// API Layer for Lst (GET, POST, PUT DELETE)
 @RestController
 @RequestMapping(path = "api/v1/list")
 public class LstController {

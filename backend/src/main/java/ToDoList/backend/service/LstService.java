@@ -1,22 +1,24 @@
 package TodoList.backend.service;
 
 import TodoList.backend.model.Lst;
+import TodoList.backend.repository.LstRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalDateTime;
 import java.util.List;
 
+// This class holds all the service functions for Lst
 @Service
 public class LstService {
+
+    private final LstRepository listRepository; // Interface that use to access the database
+
+    @Autowired
+    public LstService(LstRepository listRepository) {
+        this.listRepository = listRepository;
+    }
+
     public List<Lst> getLists() {
-        return List.of(
-                new Lst(
-                        1L,
-                        "title",
-                        "description",
-                        LocalDateTime.of(2022, 8, 28, 21, 36,0),
-                        LocalDateTime.of(2022, 8, 28, 21, 38,10)
-                )
-        );
+        return listRepository.findAll();
     }
 }
