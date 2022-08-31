@@ -1,7 +1,7 @@
 package TodoList.backend.controller;
 
-import TodoList.backend.model.Lst;
-import TodoList.backend.service.LstService;
+import TodoList.backend.model.Board;
+import TodoList.backend.service.BoardService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -11,19 +11,19 @@ import java.util.List;
 
 // API Layer for Lst (GET, POST, PUT DELETE)
 @RestController
-@RequestMapping(path = "api/v1/list")
-public class LstController {
-    private final LstService listService;
+@RequestMapping(path = "api/v1/board")
+public class BoardController {
+    private final BoardService listService;
 
     // Autowired: injects listService dependency into constructor
     // (to avoid create new instance of listService all the time)
     @Autowired
-    public LstController(LstService listService) {
+    public BoardController(BoardService listService) {
         this.listService = listService;
     }
 
     @GetMapping
-    public List<Lst> getLists() {
+    public List<Board> getLists() {
         return listService.getLists();
     }
 }

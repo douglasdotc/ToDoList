@@ -1,6 +1,11 @@
 package TodoList.backend.model;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Transient;
 import java.time.Duration;
 import java.time.LocalDateTime;
 
@@ -9,7 +14,7 @@ import java.time.LocalDateTime;
 // - The getters and setters
 // - The methods to construct a row in the table Lst
 @Entity
-public class Lst {
+public class Board {
 
 //    This will create a sequence table named lst_sequence that keep track of the next id value to be inserted.
 //    I do not see any benefit using this at the moment.
@@ -26,40 +31,39 @@ public class Lst {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "list_id")
-    private Long list_id;
+    @Column(name = "board_id")
+    private Long board_id;
     private String title;
-    private String descript;
+    private String information;
     private LocalDateTime created_time;
     private LocalDateTime last_edited_time;
-
     @Transient
     private Long live_time_day;
 
-    public Lst(String title, String descript, LocalDateTime created_time, LocalDateTime last_edited_time) {
+    public Board(String title, String information, LocalDateTime created_time, LocalDateTime last_edited_time) {
         this.title = title;
-        this.descript = descript;
+        this.information = information;
         this.created_time = created_time;
         this.last_edited_time = last_edited_time;
     }
 
-    public Lst(Long list_id, String title, String descript, LocalDateTime created_time, LocalDateTime last_edited_time) {
-        this.list_id = list_id;
+    public Board(Long board_id, String title, String information, LocalDateTime created_time, LocalDateTime last_edited_time) {
+        this.board_id = board_id;
         this.title = title;
-        this.descript = descript;
+        this.information = information;
         this.created_time = created_time;
         this.last_edited_time = last_edited_time;
     }
 
-    public Lst() {
+    public Board() {
     }
 
-    public Long getList_id() {
-        return list_id;
+    public Long getBoard_id() {
+        return board_id;
     }
 
-    public void setList_id(Long list_id) {
-        this.list_id = list_id;
+    public void setBoard_id(Long board_id) {
+        this.board_id = board_id;
     }
 
     public String getTitle() {
@@ -70,12 +74,12 @@ public class Lst {
         this.title = title;
     }
 
-    public String getDescript() {
-        return descript;
+    public String getInformation() {
+        return information;
     }
 
-    public void setDescript(String descript) {
-        this.descript = descript;
+    public void setInformation(String information) {
+        this.information = information;
     }
 
     public LocalDateTime getCreated_time() {
@@ -105,9 +109,9 @@ public class Lst {
     @Override
     public String toString() {
         return "Lst{" +
-                "list_id=" + list_id +
+                "board_id=" + board_id +
                 ", title='" + title + '\'' +
-                ", descript='" + descript + '\'' +
+                ", information='" + information + '\'' +
                 ", created_time=" + created_time +
                 ", last_edited_time=" + last_edited_time +
                 ", live_time_day=" + live_time_day +
