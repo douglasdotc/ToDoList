@@ -10,9 +10,9 @@ import java.time.Duration;
 import java.time.LocalDateTime;
 
 // This class describes:
-// - The entities of the table Lst
+// - The entities of the table Board
 // - The getters and setters
-// - The methods to construct a row in the table Lst
+// - The methods to construct a row in the table Board
 @Entity
 public class Board {
 
@@ -35,24 +35,24 @@ public class Board {
     private Long board_id;
     private String title;
     private String information;
-    private LocalDateTime created_time;
-    private LocalDateTime last_edited_time;
+    private LocalDateTime created_at;
+    private LocalDateTime last_edited_at;
     @Transient
     private Long live_time_day;
 
     public Board(String title, String information, LocalDateTime created_time, LocalDateTime last_edited_time) {
         this.title = title;
         this.information = information;
-        this.created_time = created_time;
-        this.last_edited_time = last_edited_time;
+        this.created_at = created_time;
+        this.last_edited_at = last_edited_time;
     }
 
     public Board(Long board_id, String title, String information, LocalDateTime created_time, LocalDateTime last_edited_time) {
         this.board_id = board_id;
         this.title = title;
         this.information = information;
-        this.created_time = created_time;
-        this.last_edited_time = last_edited_time;
+        this.created_at = created_time;
+        this.last_edited_at = last_edited_time;
     }
 
     public Board() {
@@ -82,24 +82,24 @@ public class Board {
         this.information = information;
     }
 
-    public LocalDateTime getCreated_time() {
-        return created_time;
+    public LocalDateTime getCreated_at() {
+        return created_at;
     }
 
-    public void setCreated_time(LocalDateTime created_time) {
-        this.created_time = created_time;
+    public void setCreated_at(LocalDateTime created_at) {
+        this.created_at = created_at;
     }
 
-    public LocalDateTime getLast_edited_time() {
-        return last_edited_time;
+    public LocalDateTime getLast_edited_at() {
+        return last_edited_at;
     }
 
-    public void setLast_edited_time(LocalDateTime last_edited_time) {
-        this.last_edited_time = last_edited_time;
+    public void setLast_edited_at(LocalDateTime last_edited_at) {
+        this.last_edited_at = last_edited_at;
     }
 
     public Long getLive_time_day() {
-        return Duration.between(this.created_time, LocalDateTime.now()).toDays();
+        return Duration.between(this.created_at, LocalDateTime.now()).toDays();
     }
 
     public void setLive_time_day(Long live_time_day) {
@@ -109,12 +109,12 @@ public class Board {
     @Override
     public String toString() {
         return "Lst{" +
-                "board_id=" + board_id +
-                ", title='" + title + '\'' +
-                ", information='" + information + '\'' +
-                ", created_time=" + created_time +
-                ", last_edited_time=" + last_edited_time +
-                ", live_time_day=" + live_time_day +
-                '}';
+            "board_id=" + board_id +
+            ", title='" + title + '\'' +
+            ", information='" + information + '\'' +
+            ", created_time=" + created_at +
+            ", last_edited_time=" + last_edited_at +
+            ", live_time_day=" + live_time_day +
+            '}';
     }
 }
