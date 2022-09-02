@@ -9,9 +9,9 @@ import java.util.Optional;
 
 // This class is an interface that access the database (a repository)
 // We need functions in JpaRepository, so we inherit from it
-@Repository
+@Repository // DAO: Data Access Object
 public interface BoardRepository extends JpaRepository<Board, Long> {
 
-    @Query("SELECT b FROM Board b WHERE b.title = ?1")
+    @Query("SELECT b FROM Board b WHERE b.title = :title") // use bind parameters (:var) to prevent code injection
     Optional<Board> findBoardByTitle(String title);
 }

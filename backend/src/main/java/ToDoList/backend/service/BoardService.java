@@ -5,7 +5,9 @@ import TodoList.backend.repository.BoardRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 
 // This class holds all the business logic for Board
@@ -31,11 +33,24 @@ public class BoardService {
         boardRepository.save(board);
     }
 
-    public void deleteBoard(Long board_id) {
-        boolean isExist = boardRepository.existsById((board_id));
+    public void deleteBoard(Long boardId) {
+        boolean isExist = boardRepository.existsById((boardId));
         if (!isExist) {
-            throw new IllegalStateException("Board with id: " + board_id + "does not exist.");
+            throw new IllegalStateException("Board with id: " + boardId + "does not exist.");
         }
-        boardRepository.deleteById(board_id);
+        boardRepository.deleteById(boardId);
+    }
+
+    @Transactional // This Annotation frees the function from calling queries (E.g. SELECT b from Board b WHERE ...)
+    public void updateBoard(Long boardId, String title, String information) {
+        Board board = boardRepository.findById(boardId).orElseThrow(() -> new IllegalStateException("Board with id: " + boardId + " does not exist"));
+
+        if (title != null && title.length() > 0 && !Objects.equals(board.getTitle(), title)) {
+            board.setTitle(title);
+        }
+
+        if (information != null && information.length() > 0 && !Objects.equals(board.getInformation(), information)) {
+            board.setInformation(information);
+        }
     }
 }
