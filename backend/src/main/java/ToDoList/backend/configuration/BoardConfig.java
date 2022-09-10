@@ -16,20 +16,20 @@ import java.util.List;
 public class BoardConfig {
 
     @Bean // CommandLineRunner: auto-run function when it is contained in Spring Boot container
-    CommandLineRunner commandLineRunner(BoardRepository boardRepository) {
+    CommandLineRunner boardCommandLineRunner(BoardRepository boardRepository) {
         return args -> {
             Board board1 = new Board(
                 "title1",
                 "description1",
-                LocalDateTime.of(2022, 8, 28, 21, 36,0),
-                LocalDateTime.of(2022, 8, 28, 21, 38,10)
+                LocalDateTime.of(2022, 8, 28, 21, 36,0, 123),
+                LocalDateTime.of(2022, 8, 28, 21, 38,10, 456)
             );
 
             Board board2 = new Board(
                 "title2",
                 "description2",
-                LocalDateTime.of(2022, 8, 29, 22, 36,0),
-                LocalDateTime.of(2022, 8, 29, 22, 38,10)
+                LocalDateTime.of(2022, 8, 29, 22, 36,0, 789),
+                LocalDateTime.of(2022, 8, 29, 22, 38,10, 159)
             );
 
             // This following line is executed when Hibernate invoke the function saveAll()

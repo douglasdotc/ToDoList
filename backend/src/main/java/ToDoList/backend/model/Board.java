@@ -3,9 +3,7 @@ package TodoList.backend.model;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
-import lombok.ToString;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -21,26 +19,10 @@ import java.time.LocalDateTime;
 // - The getters and setters
 // - The methods to construct a row in the table Board
 @Entity
-@ToString
 @AllArgsConstructor
 @NoArgsConstructor
-@Data
-@EqualsAndHashCode // For equals checks
+@Data // Includes @Getter @Setter @ToString @RequiredArgsConstructor @EqualsAndHashCode
 public class Board {
-
-//    This will create a sequence table named lst_sequence that keep track of the next id value to be inserted.
-//    I do not see any benefit using this at the moment.
-//    @Id
-//    @SequenceGenerator(
-//            name = "lst_sequence",
-//            sequenceName = "lst_sequence",
-//            allocationSize = 1
-//    )
-//    @GeneratedValue(
-//            strategy = GenerationType.SEQUENCE,
-//            generator = "lst_sequence"
-//    )
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "board_id") // Specifies the mapped column for a persistent property or field

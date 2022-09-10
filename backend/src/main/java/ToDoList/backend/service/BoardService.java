@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
@@ -21,29 +22,23 @@ public class BoardService {
         this.boardRepository = boardRepository;
     }
 
-    public List<Board> getLists() {
+    public List<Board> getBoards() {
         return boardRepository.findAll();
     }
 
-    public void addNewBoard(Board board) {
+    public void createBoard(Board board) {
         Optional<Board> boardByTitle = boardRepository.findBoardByTitle(board.getTitle());
         if (boardByTitle.isPresent()) {
-            throw new IllegalStateException("title taken");
+            throw new IllegalStateException("[POST] title taken");
         }
         boardRepository.save(board);
     }
 
-    public void deleteBoard(Long boardId) {
-        boolean isExist = boardRepository.existsById((boardId));
-        if (!isExist) {
-            throw new IllegalStateException("Board with id: " + boardId + "does not exist.");
-        }
-        boardRepository.deleteById(boardId);
-    }
-
     @Transactional // This Annotation frees the function from calling queries (E.g. SELECT b from Board b WHERE ...)
     public void updateBoard(Long boardId, String title, String information) {
-        Board board = boardRepository.findById(boardId).orElseThrow(() -> new IllegalStateException("Board with id: " + boardId + " does not exist"));
+        Board board = boardRepository.findById(boardId).orElseThrow(
+            () -> new IllegalStateException("[PUT] Board with id: " + boardId + " does not exist")
+        );
 
         if (title != null && title.length() > 0 && !Objects.equals(board.getTitle(), title)) {
             board.setTitle(title);
@@ -52,5 +47,15 @@ public class BoardService {
         if (information != null && information.length() > 0 && !Objects.equals(board.getInformation(), information)) {
             board.setInformation(information);
         }
+
+        board.setLastEditedAt(LocalDateTime.now());
+    }
+
+    public void deleteBoard(Long boardId) {
+        boolean isExist = boardRepository.existsById((boardId));
+        if (!isExist) {
+            throw new IllegalStateException("[DELETE] Board with id: " + boardId + " does not exist.");
+        }
+        boardRepository.deleteById(boardId);
     }
 }

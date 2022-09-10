@@ -2,7 +2,6 @@ package TodoList.backend.controller;
 
 import TodoList.backend.model.Board;
 import TodoList.backend.service.BoardService;
-import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -31,17 +30,12 @@ public class BoardController {
 
     @GetMapping
     public List<Board> getLists() {
-        return boardService.getLists();
+        return boardService.getBoards();
     }
 
     @PostMapping
-    public void registerNewBoard(@RequestBody Board board) {
-        boardService.addNewBoard(board);
-    }
-
-    @DeleteMapping(path = "{boardId}")
-    public void deleteBoard(@PathVariable("boardId") Long boardId) {
-        boardService.deleteBoard(boardId);
+    public void createBoard(@RequestBody Board board) {
+        boardService.createBoard(board);
     }
 
     @PutMapping(path = "{boardId}")
@@ -49,5 +43,10 @@ public class BoardController {
                             @RequestParam(required = false) String title,
                             @RequestParam(required = false) String information) {
         boardService.updateBoard(boardId, title, information);
+    }
+
+    @DeleteMapping(path = "{boardId}")
+    public void deleteBoard(@PathVariable("boardId") Long boardId) {
+        boardService.deleteBoard(boardId);
     }
 }

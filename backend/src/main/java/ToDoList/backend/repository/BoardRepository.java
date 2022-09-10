@@ -7,7 +7,7 @@ import org.springframework.stereotype.Repository;
 
 import java.util.Optional;
 
-// This class is an interface that access the database (a repository)
+// This class is an interface that access the board database (a repository)
 // We need functions in JpaRepository, so we inherit from it
 @Repository // DAO: Data Access Object
 public interface BoardRepository extends JpaRepository<Board, Long> {
