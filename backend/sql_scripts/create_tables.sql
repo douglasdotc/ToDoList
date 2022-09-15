@@ -11,17 +11,19 @@ create table board(
 );
 
 # One list/board can have many items
-create table board_items(
-	board_id integer not null,
-	item_id integer not null
-);
+-- create table board_items(
+-- 	board_id integer not null,
+-- 	item_id integer not null
+-- );
 
 # title and content are unique to an item
 create table item(
 	item_id integer not null auto_increment,
+    board_id integer not null,
 	title varchar(255),
 	content text,
-	primary key(item_id)
+	primary key(item_id),
+    foreign key(board_id) references board(board_id)
 );
 
 # One item can have many properties
