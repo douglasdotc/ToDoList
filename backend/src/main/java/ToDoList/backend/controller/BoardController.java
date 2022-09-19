@@ -47,7 +47,7 @@ public class BoardController {
         return ResponseEntity.ok(
             Response.builder()
                 .timeStamp(now())
-                .data(of("boards", boardService.getBoardByTitle(title)))
+                .data(of("board", boardService.getBoardByTitle(title)))
                 .message("Board " + title + " retrieved")
                 .httpStatus(OK)
                 .statusCode(OK.value())
@@ -69,10 +69,14 @@ public class BoardController {
         );
     }
 
-    @PutMapping(path = "/updateBoard/{boardId}")
-    public ResponseEntity<Response> updateBoard(@PathVariable("boardId") Long boardId,
-                            @RequestParam(required = false) String title, // Optional
-                            @RequestParam(required = false) String information) { // Optional
+    @PutMapping(path = "/updateBoard")
+    public ResponseEntity<Response> updateBoard(@RequestBody Board board) {
+//                            @PathVariable("boardId") Long boardId,
+//                            @RequestParam(required = false) String title, // Optional
+//                            @RequestParam(required = false) String information) { // Optional
+        Long boardId = board.getBoardId();
+        String title = board.getTitle();
+        String information = board.getInformation();
 
         if (title.length() == 0 && information.length() == 0) {
             return ResponseEntity.ok(
