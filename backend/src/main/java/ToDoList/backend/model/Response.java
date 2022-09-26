@@ -20,6 +20,5 @@ public class Response {
     protected HttpStatus httpStatus;
     protected String reason;
     protected String message;
-    protected String devMessage;
     protected Map<?, ?> data;
 }
